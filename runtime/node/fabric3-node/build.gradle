@@ -1,4 +1,4 @@
-apply plugin: 'fatjar'
+apply plugin: 'eu.appsatori.fatjar'
 
 configurations {
     all {
@@ -7,9 +7,11 @@ configurations {
 }
 
 buildscript {
-
+    repositories {
+        jcenter()
+    }
     dependencies {
-        classpath 'eu.appsatori:gradle-fatjar-plugin:0.2-rc1'
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
     }
 }
 
