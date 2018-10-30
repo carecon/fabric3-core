@@ -28,7 +28,7 @@ import org.fabric3.plugin.runtime.PluginConstants;
  */
 public class Dependencies {
 
-    public static final String F3_GROUP_ID = "org.fabric3";
+    public static final String F3_GROUP_ID = "com.carecon.fabric3";
 
     /**
      * Returns the core runtime extensions as a set of dependencies

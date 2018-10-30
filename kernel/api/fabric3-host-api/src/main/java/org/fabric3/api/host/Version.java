@@ -36,11 +36,13 @@ import java.util.StringTokenizer;
 public class Version implements Comparable, Serializable {
     private static final long serialVersionUID = -2755678770473603563L;
     private static final String SEPARATOR = ".";
+    public static final String SNAPSHOT_SUFFIX = "-SNAPSHOT";
 
     private final int major;
     private final int minor;
     private final int micro;
     private final String qualifier;
+    private final boolean snapshot;
 
     /**
      * The empty version "0.0.0". Equivalent to calling <code>new Version(0,0,0)</code>.
@@ -59,7 +61,21 @@ public class Version implements Comparable, Serializable {
      * @throws IllegalArgumentException If the numerical components are negative.
      */
     public Version(int major, int minor, int micro) {
-        this(major, minor, micro, null);
+        this(major, minor, micro, null, false);
+    }
+
+
+    /**
+     * Creates a version identifier from the specified components.
+     *
+     * @param major Major component of the version identifier.
+     * @param minor Minor component of the version identifier.
+     * @param micro Micro component of the version identifier.
+     * @param qualifier Qualifier component of the version identifier. If <code>null</code> is specified, then the qualifier will be set to the empty string.
+     * @throws IllegalArgumentException If the numerical components are negative.
+     */
+    public Version(int major, int minor, int micro, String qualifier) {
+        this(major, minor, micro, qualifier, false);
     }
 
     /**
@@ -69,9 +85,10 @@ public class Version implements Comparable, Serializable {
      * @param minor     Minor component of the version identifier.
      * @param micro     Micro component of the version identifier.
      * @param qualifier Qualifier component of the version identifier. If <code>null</code> is specified, then the qualifier will be set to the empty string.
+     * @param snapshot  Indicates snapshot state of the version.
      * @throws IllegalArgumentException If the numerical components are negative or the qualifier string is invalid.
      */
-    public Version(int major, int minor, int micro, String qualifier) {
+    public Version(int major, int minor, int micro, String qualifier, boolean snapshot) {
         if (qualifier == null) {
             qualifier = "";
         }
@@ -80,6 +97,7 @@ public class Version implements Comparable, Serializable {
         this.minor = minor;
         this.micro = micro;
         this.qualifier = qualifier;
+        this.snapshot = snapshot;
         validate();
     }
 
@@ -109,6 +127,12 @@ public class Version implements Comparable, Serializable {
         int minor = 0;
         int micro = 0;
         String qualifier = "";
+        boolean snapshot = false;
+
+        if (version.endsWith(SNAPSHOT_SUFFIX)) {
+            snapshot = true;
+            version = version.substring(0, version.length() - SNAPSHOT_SUFFIX.length());
+        }
 
         try {
             StringTokenizer st = new StringTokenizer(version, SEPARATOR, true);
@@ -140,6 +164,7 @@ public class Version implements Comparable, Serializable {
         this.minor = minor;
         this.micro = micro;
         this.qualifier = qualifier;
+        this.snapshot = snapshot;
         validate();
     }
 
@@ -203,6 +228,15 @@ public class Version implements Comparable, Serializable {
     }
 
     /**
+     * Returns true if this version is a snapshot.
+     *
+     * @return The snapshot component.
+     */
+    public boolean isSnapshot() {
+        return snapshot;
+    }
+
+    /**
      * Returns the string representation of this version identifier.
      *
      *
@@ -212,12 +246,14 @@ public class Version implements Comparable, Serializable {
      * @return The string representation of this version identifier.
      */
     public String toString() {
-        String base = major + SEPARATOR + minor + SEPARATOR + micro;
-        if (qualifier.length() == 0) {
-            return base;
-        } else {
-            return base + SEPARATOR + qualifier;
+        String version = major + SEPARATOR + minor + SEPARATOR + micro;
+        if (qualifier.length() > 0) {
+            version = version + SEPARATOR + qualifier;
         }
+        if (snapshot) {
+            version = version + SNAPSHOT_SUFFIX;
+        }
+        return version;
     }
 
     /**
@@ -226,7 +262,7 @@ public class Version implements Comparable, Serializable {
      * @return An integer which is a hash code value for this object.
      */
     public int hashCode() {
-        return (major << 24) + (minor << 16) + (micro << 8) + qualifier.hashCode();
+        return (((major << 24) + (minor << 16) + (micro << 8) + qualifier.hashCode()) << 1) + (snapshot ? 1 : 0);
     }
 
     /**
@@ -249,7 +285,7 @@ public class Version implements Comparable, Serializable {
         }
 
         Version other = (Version) object;
-        return (major == other.major) && (minor == other.minor) && (micro == other.micro) && qualifier.equals(other.qualifier);
+        return (major == other.major) && (minor == other.minor) && (micro == other.micro) && qualifier.equals(other.qualifier) && snapshot == other.snapshot;
     }
 
     /**
@@ -290,7 +326,12 @@ public class Version implements Comparable, Serializable {
             return result;
         }
 
-        return qualifier.compareTo(other.qualifier);
+        result = qualifier.compareTo(other.qualifier);
+        if (result != 0) {
+            return result;
+        }
+
+        return Boolean.compare(snapshot, other.snapshot);
     }
 
     /**
@@ -315,5 +356,4 @@ public class Version implements Comparable, Serializable {
             }
         }
     }
-
 }
