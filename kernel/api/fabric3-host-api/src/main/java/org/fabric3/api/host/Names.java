@@ -26,7 +26,7 @@ import java.net.URI;
  */
 public interface Names {
 
-    String VERSION = "3.0.1-SNAPSHOT";
+    String VERSION = "3.1.0-SNAPSHOT";
 
     URI BOOT_CONTRIBUTION = URI.create("fabric3-boot");
 
