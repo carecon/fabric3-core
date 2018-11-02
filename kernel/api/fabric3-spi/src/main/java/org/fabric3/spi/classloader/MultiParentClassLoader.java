@@ -116,7 +116,16 @@ public class MultiParentClassLoader extends DelegatingResourceClassLoader {
      *
      * @return the name of this classloader
      */
-    public URI getName() {
+    public String getName() {
+        return name.toString();
+    }
+
+    /**
+     * Returns the name of this classloader.
+     *
+     * @return the name of this classloader
+     */
+    public URI getNameUri() {
         return name;
     }
 

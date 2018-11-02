@@ -288,10 +288,6 @@ configure(kernelAndExtensions()) {
     }
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.11'
-}
-
 /**
  * Forces setting of the POM packaging as may be over-written before uploading.
  * @param deployment the current deployment

@@ -77,7 +77,7 @@ public class DefaultEntityManagerFactoryCache implements EntityManagerFactoryCac
         ClassLoader classLoader = classLoaderRegistry.getClassLoader(uri);
         URI key;
         if (classLoader instanceof MultiParentClassLoader) {
-            key = ((MultiParentClassLoader) classLoader).getName();
+            key = ((MultiParentClassLoader) classLoader).getNameUri();
         } else {
             key = Names.BOOT_CONTRIBUTION;
         }

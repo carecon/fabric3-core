@@ -62,7 +62,7 @@ public class BytecodeChannelProxyService implements ChannelProxyServiceExtension
         if (!(interfaze.getClassLoader() instanceof MultiParentClassLoader)) {
             return Names.BOOT_CONTRIBUTION;
         }
-        return ((MultiParentClassLoader) interfaze.getClassLoader()).getName();
+        return ((MultiParentClassLoader) interfaze.getClassLoader()).getNameUri();
     }
 
 }

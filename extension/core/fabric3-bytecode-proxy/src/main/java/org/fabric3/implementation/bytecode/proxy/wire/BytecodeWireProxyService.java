@@ -93,7 +93,7 @@ public class BytecodeWireProxyService implements WireProxyServiceExtension {
         if (!(classLoader instanceof MultiParentClassLoader)) {
             throw new AssertionError("Expected " + MultiParentClassLoader.class.getName());
         }
-        return ((MultiParentClassLoader) classLoader).getName();
+        return ((MultiParentClassLoader) classLoader).getNameUri();
     }
 
     private Map<Method, InvocationChain> resolveMethods(Class<?> interfaze, List<InvocationChain> chains) {

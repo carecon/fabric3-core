@@ -34,9 +34,9 @@ public class ContributionResolver {
      */
     public static URI getContribution(Class<?> type) {
         if (Thread.currentThread().getContextClassLoader() instanceof MultiParentClassLoader) {
-            return ((MultiParentClassLoader) Thread.currentThread().getContextClassLoader()).getName();
+            return ((MultiParentClassLoader) Thread.currentThread().getContextClassLoader()).getNameUri();
         } else if (type.getClassLoader() instanceof MultiParentClassLoader) {
-            return ((MultiParentClassLoader) type.getClassLoader()).getName();
+            return ((MultiParentClassLoader) type.getClassLoader()).getNameUri();
         } else {
             return Names.HOST_CONTRIBUTION;
         }
@@ -49,7 +49,7 @@ public class ContributionResolver {
      */
     public static URI getContribution() {
         if (Thread.currentThread().getContextClassLoader() instanceof MultiParentClassLoader) {
-            return ((MultiParentClassLoader) Thread.currentThread().getContextClassLoader()).getName();
+            return ((MultiParentClassLoader) Thread.currentThread().getContextClassLoader()).getNameUri();
         } else {
             return Names.HOST_CONTRIBUTION;
         }

@@ -73,5 +73,4 @@ public class DelegatingResourceClassLoader extends URLClassLoader {
             throw new UnsupportedOperationException("This classloader cannot be used as a top-level classloader");
         }
     }
-
 }

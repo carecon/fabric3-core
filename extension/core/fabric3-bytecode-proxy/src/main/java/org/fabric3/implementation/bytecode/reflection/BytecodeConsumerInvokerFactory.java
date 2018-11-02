@@ -235,7 +235,7 @@ public class BytecodeConsumerInvokerFactory implements ConsumerInvokerFactory, C
         URI classLoaderKey;
         ClassLoader classLoader = method.getDeclaringClass().getClassLoader();
         if (classLoader instanceof MultiParentClassLoader) {
-            classLoaderKey = ((MultiParentClassLoader) classLoader).getName();
+            classLoaderKey = ((MultiParentClassLoader) classLoader).getNameUri();
         } else {
             classLoaderKey = Names.BOOT_CONTRIBUTION;
         }

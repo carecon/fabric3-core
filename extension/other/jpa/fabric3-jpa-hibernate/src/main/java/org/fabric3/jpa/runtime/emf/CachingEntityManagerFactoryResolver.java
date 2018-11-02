@@ -59,7 +59,7 @@ public class CachingEntityManagerFactoryResolver implements EntityManagerFactory
         EntityManagerFactory factory = createEntityManagerFactory(overrides, classLoader);
         URI key;
         if (classLoader instanceof MultiParentClassLoader) {
-            key = ((MultiParentClassLoader) classLoader).getName();
+            key = ((MultiParentClassLoader) classLoader).getNameUri();
         } else {
             key = Names.HOST_CONTRIBUTION;
         }
