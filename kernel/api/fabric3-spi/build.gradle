@@ -9,7 +9,7 @@ dependencies {
 jar {
     manifest {
         instruction 'Bundle-Description', 'Fabric3 Extension SPI'
-        instruction 'Export-Package', "org.fabric3.spi.*;version=${fabric3ReleaseVersion}"
+        instruction 'Export-Package', "org.fabric3.spi.*;version=${fabric3Version}"
         instruction 'Import-Package', '!sun.security.util,*'
     }
 }

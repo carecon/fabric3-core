@@ -10,7 +10,7 @@ dependencies {
 jar {
     manifest {
         instruction 'Bundle-Description', 'Fabric3 DSL'
-        instruction 'Export-Package', "org.fabric3.api.model.*;version=${fabric3ReleaseVersion}"
+        instruction 'Export-Package', "org.fabric3.api.model.*;version=${fabric3Version}"
     }
 }
 

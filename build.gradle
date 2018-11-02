@@ -129,7 +129,7 @@ configure(deployProjects()) {
             }
         }
         dependencies {
-            classpath group: 'com.carecon.fabric3.gradle', name: 'fabric3-contribution', version: fabric3GradleVersion
+            classpath group: fabric3GradleGroup, name: 'fabric3-contribution', version: fabric3GradleVersion
         }
 
     }
@@ -321,3 +321,31 @@ private void setPomPackaging(MavenDeployment deployment, MavenPom pom) {
     transformer.transform(source, result);
 }
 
+
+// Version & group
+task('updateVersionInformationInFiles') {
+    doLast {
+        def file = new File("kernel/api/fabric3-host-api/src/main/java/org/fabric3/api/host/Names.java")
+        def content = file.getText("UTF-8")
+                .replaceFirst("(String VERSION = \")([^\"]+)(\";)", "\$1$version\$3")
+        file.write(content, "UTF-8")
+
+        file = new File("runtime/plugin/fabric3-plugin-base/src/main/java/org/fabric3/plugin/resolver/Dependencies.java")
+        content = file.getText("UTF-8")
+                .replaceFirst("(public static final String F3_GROUP_ID = \")([^\"]+)(\";)", "\$1$fabric3Group\$3")
+        file.write(content, "UTF-8")
+
+
+        def files =  fileTree("$projectDir").filter { it.isFile() && it.name.equals('sca-contribution.xml') }.files
+        files.forEach {
+            content = it.getText("UTF-8")
+                    .replaceAll("(<import.java package=\"org.fabric3[^\"]*\" version=\")([^\"]+)(\"/>)", "\$1$version\$3")
+                    .replaceAll("(<export.java package=\"org.fabric3[^\"]*\" version=\")([^\"]+)(\"/>)", "\$1$version\$3")
+            it.write(content, "UTF-8")
+        }
+    }
+}
+
+configure(deployProjects()) {
+    compileJava.dependsOn updateVersionInformationInFiles
+}

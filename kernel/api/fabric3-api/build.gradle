@@ -9,7 +9,7 @@ dependencies {
 
 jar {
     manifest {
-        instruction 'Export-Package', "org.fabric3.*;version=${fabric3ReleaseVersion}"
+        instruction 'Export-Package', "org.fabric3.*;version=${fabric3Version}"
         instruction 'Bundle-Description', 'Fabric3 APIs for applications'
     }
 }
