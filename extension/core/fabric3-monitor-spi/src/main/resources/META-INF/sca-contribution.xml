@@ -4,9 +4,9 @@
               f3:extension="true"
               f3:boot.level="0"
               f3:description="Monitor SPI extension">
-    <import.java package="org.fabric3.spi.*" version="3.1.0"/>
+    <import.java package="org.fabric3.spi.*" version="3.1.1-SNAPSHOT"/>
 
-    <export.java package="org.fabric3.monitor.spi.*" version="3.1.0"/>
+    <export.java package="org.fabric3.monitor.spi.*" version="3.1.1-SNAPSHOT"/>
 
 
 </contribution>

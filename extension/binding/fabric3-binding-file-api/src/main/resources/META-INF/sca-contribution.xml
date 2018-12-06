@@ -4,7 +4,7 @@
               f3:extension="true"
               f3:description="File binding API extension">
     <import.java package="org.fabric3.api.model.*"/>
-    <export.java package="org.fabric3.api.binding.file.*" version="3.1.0"/>
+    <export.java package="org.fabric3.api.binding.file.*" version="3.1.1-SNAPSHOT"/>
 
     <f3:provides.capability name="file.binding"/>
 
