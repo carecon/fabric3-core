@@ -4,7 +4,7 @@
               f3:extension="true"
               f3:description="ZeroMQ binding API extension">
     <import.java package="org.fabric3.api.model.*"/>
-    <export.java package="org.fabric3.api.binding.zeromq.*" version="3.1.0-SNAPSHOT"/>
+    <export.java package="org.fabric3.api.binding.zeromq.*" version="3.1.0"/>
 
 
 </contribution>

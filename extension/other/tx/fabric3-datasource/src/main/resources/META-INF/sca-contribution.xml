@@ -3,8 +3,8 @@
               xmlns:f3="urn:fabric3.org"
               f3:description="DataSource extension"
               f3:extension="true">
-    <import.java package="org.fabric3.spi.*" version="3.1.0-SNAPSHOT"/>
-    <import.java package="org.fabric3.resource.spi" version="3.1.0-SNAPSHOT"/>
-    <export.java package="org.fabric3.datasource.spi" version="3.1.0-SNAPSHOT"/>
+    <import.java package="org.fabric3.spi.*" version="3.1.0"/>
+    <import.java package="org.fabric3.resource.spi" version="3.1.0"/>
+    <export.java package="org.fabric3.datasource.spi" version="3.1.0"/>
     <deployable composite="f3:DataSourceExtension"/>
 </contribution>
